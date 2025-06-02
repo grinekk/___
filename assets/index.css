@@ -593,7 +593,7 @@ input:focus{
 }
 
 @keyframes loading {
-    
+
     0%{
         rotate: 0deg;
     }
@@ -620,12 +620,12 @@ input:focus{
 }
 
 #wrong-password{
-    color: red; 
+    color: red;
     display: none;
      margin-top: 10px;
 }
 
 #password-input{
-    padding: 10px; 
+    padding: 10px;
     font-size: 16px;
 }

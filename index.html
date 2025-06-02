@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/index.css">
@@ -6,7 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no">
 </head>
 <body>
-  <img src="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4" class="logo">
+
+  <!-- Ekran logowania -->
+  <div id="auth-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#fff; z-index:9999; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+    <h2>Podaj hasło, aby kontynuować</h2>
+    <input type="password" id="password-input" placeholder="Hasło" style="padding: 10px; font-size: 16px; margin: 10px;">
+    <button onclick="checkPassword()" style="padding: 10px 20px; font-size: 16px; background-color: #1976d2; color: white; border: none; border-radius: 5px;">Zaloguj</button>
+    <p id="wrong-pass" style="color:red; display:none;">Nieprawidłowe hasło</p>
+  </div>
+
+  <!-- Główna zawartość strony - ukryta do czasu poprawnego hasła -->
+  <div id="main-content" style="display:none;">
+
+    <img src="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4" class="logo">
     <p class="logo_text">FmOBywatel 📲</p>
     <div class="guide_holder">
         <div class="top_holder">
@@ -34,7 +48,6 @@
         <img class="upload_uploaded">
         <div class="upload_uploading"></div>
         <div class="upload_grid">
-            
             <p class="upload_text">Dodaj zdjęcie</p>
         </div>
     </div>
@@ -44,7 +57,7 @@
         <span class="placeholder">Imię (imiona)</span>
         <p class="error">To pole jest wymagane</p>
     </div>
- 
+
     <div class="input_holder">
         <input type="text" id="surname" class="input" placeholder="">
         <span class="placeholder">Nazwisko</span>
@@ -70,15 +83,9 @@
     <div class="date">
         <p class="top_info">Data urodzenia</p>
         <div class="date_grid">
-            <input class="date_input" placeholder="DD" type="number">
-    
-            </input>
-            <input class="date_input" placeholder="MM" type="number">
-    
-            </input>
-            <input class="date_input" placeholder="YYYY" type="number">
-    
-            </input>
+            <input class="date_input" placeholder="DD" type="number"></input>
+            <input class="date_input" placeholder="MM" type="number"></input>
+            <input class="date_input" placeholder="YYYY" type="number"></input>
         </div>
         <p class="error">Wprowadź prawidłową datę</p>
     </div>
@@ -107,19 +114,17 @@
         <p class="error">To pole jest wymagane</p>
     </div>
 
-    
     <div class="input_holder">
         <input type="text" id="motherName" class="input" placeholder="">
         <span class="placeholder">Imię matki</span>
         <p class="error">To pole jest wymagane</p>
     </div>
-    
+
     <div class="input_holder">
         <input type="text" id="fatherName" class="input" placeholder="">
         <span class="placeholder">Imię ojca</span>
         <p class="error">To pole jest wymagane</p>
     </div>
-    
 
     <p class="subtext">Miejsce zamieszkania</p>
 
@@ -169,9 +174,9 @@
         <input type="text" id="waznosc" class="input" placeholder="">
         <span class="placeholder">Data ważności dokumentu</span>
         <p class="error">To pole jest wymagane</p>
-      </div>
+    </div>
 
-      <div style="text-align: center; margin-top: 20px;">
+    <div style="text-align: center; margin-top: 20px;">
         <button id="generate-dates-btn" style="
           padding: 10px 20px;
           background-color: #1976d2;
@@ -183,84 +188,94 @@
         ">
           Generuj daty
         </button>
-      </div>
-      
-
-    
+    </div>
 
     <a class="go">wejdź</a>
-    
 
-    
+  </div>
 
-    <script src="assets/index.js"></script>
-    <script src="assets/manifest.js"></script>
-    <script>
+  <script src="assets/index.js"></script>
+  <script src="assets/manifest.js"></script>
 
-function generateDocumentNumber() {
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const series = Array.from({ length: 3 }, () =>
-    letters[Math.floor(Math.random() * letters.length)]
-  ).join("");
+  <script>
+    // Hasło do zabezpieczenia strony:
+    const correctPassword = "8642"; // <- zmień na swoje hasło
 
-  const number = Math.floor(100000 + Math.random() * 900000); // 6-cyfrowy numer
-  return `${series} ${number}`;
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("seria_numer");
-  if (input) {
-    input.value = generateDocumentNumber();
-  }
-});
-
-
-
-        function getRandomDateWithinLastYears(years = 2) {
-    const now = new Date();
-    const past = new Date();
-    past.setFullYear(now.getFullYear() - years);
-    return new Date(past.getTime() + Math.random() * (now.getTime() - past.getTime()));
-}
-
-function formatDate(date) {
-    const dd = String(date.getDate()).padStart(2, '0');
-    const mm = String(date.getMonth() + 1).padStart(2, '0');
-    const yyyy = date.getFullYear();
-    return `${dd}.${mm}.${yyyy}`;
-}
-
-function calculateDates() {
-    const day = parseInt(document.querySelectorAll('.date_input')[0].value);
-    const month = parseInt(document.querySelectorAll('.date_input')[1].value);
-    const year = parseInt(document.querySelectorAll('.date_input')[2].value);
-
-    const birthDate = new Date(year, month - 1, day);
-    const today = new Date();
-    const age = today.getFullYear() - birthDate.getFullYear() -
-               (today.getMonth() < birthDate.getMonth() || 
-               (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate()) ? 1 : 0);
-
-    if (isNaN(age) || age < 18) {
-        return;
+    function checkPassword() {
+      const input = document.getElementById("password-input").value;
+      const wrongPassMsg = document.getElementById("wrong-pass");
+      if (input === correctPassword) {
+        document.getElementById("auth-screen").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+      } else {
+        wrongPassMsg.style.display = "block";
+      }
     }
 
-    const wydany = getRandomDateWithinLastYears(2);
-    const waznosc = new Date(wydany);
-    waznosc.setFullYear(wydany.getFullYear() + 5);
+    // --- poniżej oryginalne skrypty strony ---
 
-    document.getElementById("wydany").value = formatDate(wydany);
-    document.getElementById("waznosc").value = formatDate(waznosc);
-}
+    function generateDocumentNumber() {
+      const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const series = Array.from({ length: 3 }, () =>
+        letters[Math.floor(Math.random() * letters.length)]
+      ).join("");
 
-document.addEventListener("DOMContentLoaded", () => {
-    calculateDates(); // Automatyczne uzupełnienie po załadowaniu (jeśli pola daty urodzenia są wypełnione)
-});
+      const number = Math.floor(100000 + Math.random() * 900000); // 6-cyfrowy numer
+      return `${series} ${number}`;
+    }
 
-document.getElementById("generate-dates-btn").addEventListener("click", () => {
-    calculateDates();
-});
-    </script>
-    
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.getElementById("seria_numer");
+      if (input) {
+        input.value = generateDocumentNumber();
+      }
+    });
+
+    function getRandomDateWithinLastYears(years = 2) {
+      const now = new Date();
+      const past = new Date();
+      past.setFullYear(now.getFullYear() - years);
+      return new Date(past.getTime() + Math.random() * (now.getTime() - past.getTime()));
+    }
+
+    function formatDate(date) {
+      const dd = String(date.getDate()).padStart(2, '0');
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const yyyy = date.getFullYear();
+      return `${dd}.${mm}.${yyyy}`;
+    }
+
+    function calculateDates() {
+      const day = parseInt(document.querySelectorAll('.date_input')[0].value);
+      const month = parseInt(document.querySelectorAll('.date_input')[1].value);
+      const year = parseInt(document.querySelectorAll('.date_input')[2].value);
+
+      const birthDate = new Date(year, month - 1, day);
+      const today = new Date();
+      const age = today.getFullYear() - birthDate.getFullYear() -
+                 (today.getMonth() < birthDate.getMonth() ||
+                 (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate()) ? 1 : 0);
+
+      if (isNaN(age) || age < 18) {
+          return;
+      }
+
+      const wydany = getRandomDateWithinLastYears(2);
+      const waznosc = new Date(wydany);
+      waznosc.setFullYear(wydany.getFullYear() + 5);
+
+      document.getElementById("wydany").value = formatDate(wydany);
+      document.getElementById("waznosc").value = formatDate(waznosc);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      calculateDates();
+    });
+
+    document.getElementById("generate-dates-btn").addEventListener("click", () => {
+      calculateDates();
+    });
+  </script>
 
 </body>
+</html>
