@@ -3,8 +3,56 @@ body .bottom_bar{
     z-index: 1;
 }
 
+.top-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 37px;
+    margin: 25px 8px 30px;
+    flex-wrap: nowrap
+}
+
+.top-buttons button {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: Poppins, sans-serif;
+    color: #cacacc;
+    width: 70px; 
+    text-align: center;
+}
+
+.icon-circle {
+    width: 67px;
+    aspect-ratio: 1 / 1; 
+    background: var(--background2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+}
+
+.icon-circle img {
+    width: 31px;
+    height: 31px;
+    object-fit: contain;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+
 .back_img{
-    width: 17px;
+    width: 9px;
+    margin-right: 4px;
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -28,11 +76,11 @@ body .bottom_bar{
 }
 
 .title_text{
-    font-size: 18px;
-    color: #3b3c41;
+    font-size: 20px;
+    color: #eeeeee;
     text-align: center;
     width: 100%;
-    font-weight: bold;
+    font-weight: 500; 
     margin-top: auto;
     margin-bottom: auto;
     height: max-content;
@@ -87,6 +135,7 @@ body .bottom_bar{
 
 .data_title{
     font-weight: 600;
+    color: var(--font2);
     font-size: 18px;
     height: max-content;
     margin-top: auto;
@@ -100,6 +149,7 @@ body .bottom_bar{
 .id_image{
     z-index: -1;
     width: 95%;
+    height: 53%;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -107,7 +157,7 @@ body .bottom_bar{
     pointer-events: none;
     box-shadow: var(--shadow);
     clip-path: inset(-10px -10px 0px -10px);
-    border-radius: 15px 15px 0px 0px;
+    border-radius: 19px 19px 0px 0px;
 }
 
 .other_grid{
@@ -122,7 +172,7 @@ body .bottom_bar{
 
 .bottom_text{
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 500;
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 17px;
@@ -148,13 +198,12 @@ body .bottom_bar{
 }
 
 .inset{
-    box-shadow: inset 0px 0px 20px white;
     background-color: transparent;
     position: absolute;
     top: 5%;
     left: 7.5%;
     width: 35%;
-    border-radius: 15px;
+    border-radius: 19px;
     height: 42%;
     z-index: 1;
     background-position: center;
@@ -166,6 +215,7 @@ body .bottom_bar{
     pointer-events: none;
     filter: grayscale(1);
     box-shadow: 0px 0px 5px white;
+    box-shadow: inset 0px 0px 12px rgba(255, 255, 255, 0.18);
     position: absolute;
     top: 5%;
     left: 7.5%;
@@ -200,7 +250,7 @@ body .bottom_bar{
     height: max-content;
     margin-top: auto;
     margin-bottom: auto;
-    color: #52575f;
+    color: #ffffff;
     font-size: 16px;
     font-weight: 500;
 }
@@ -209,7 +259,7 @@ body .bottom_bar{
     height: max-content;
     margin-top: auto;
     margin-bottom: auto;
-    color: #1f2125;
+    color: var(--font);
     font-weight: 600;
     font-size: 18px;
 }
@@ -228,17 +278,18 @@ body .bottom_bar{
 
 .id_bottom{
     box-shadow: var(--shadow);
-    border-radius: 0px 0px 15px 15px;
-    background-color: white;
+    border-radius: 0px 0px 19px 19px;
+    background-color: var(--background2);
     height: 80px;
     z-index: 1;
     width: 95%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
 }
 
 .back_text{
-    color: #014A93;
+    color: var(--text);
     font-weight: 500;
     font-size: 18px;
     height: max-content;
@@ -257,7 +308,7 @@ body .bottom_bar{
 
 .top_grid{
     z-index: 1;
-    background-color: #f5f6fb;
+    background-color: var(--background);
     position: fixed;
     top: -10px;
     height: 60px;
@@ -271,7 +322,7 @@ body .bottom_bar{
 .time_text{
     margin-top: 60px;
     margin-bottom: 20px;
-    color: #666b72;
+    color: #949ba2;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -279,11 +330,13 @@ body .bottom_bar{
 
 .bottom_holder{
     position: relative;
-    width: 100%;
-    height: 80px;
-    background-color: white;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 90px;
+    background-color: var(--background2);
     box-shadow: var(--shadow);
-    border-radius: 15px;
+    border-radius: 19px;
     margin-top: 10px;
     margin-bottom: 10px;
     overflow: hidden;
@@ -291,13 +344,14 @@ body .bottom_bar{
 }
 
 .info_holder .bottom_grid{
-    height: 70px;
+    height: 90px;
+    
 }
 
 .info_holder{
     height: unset;
     transition: 200ms;
-    max-height: 70px;
+    max-height: 90px;
 }
 
 .additional_holder{
@@ -310,7 +364,7 @@ body .bottom_bar{
 
 .info_holder .action_arrow{
     rotate: 90deg;
-    top: 27px;
+    top: 37px;
     bottom: auto;
 }
 
@@ -331,7 +385,7 @@ body .bottom_bar{
 }
 
 .additional_subtitle{
-    font-size: 17px;
+    font-size: 20px;
     font-weight: 500;
     margin-top: 3px;
     margin-bottom: 17px;
@@ -343,9 +397,9 @@ body .bottom_bar{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    border-bottom: 0.1px solid rgb(146, 146, 146);
+    border-bottom: 0.1px solid #323332;
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .confirm{
@@ -359,7 +413,7 @@ body .bottom_bar{
 }
 
 .opacity{
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     opacity: 0;
     width: 100%;
     height: 100%;
@@ -408,7 +462,7 @@ body .bottom_bar{
     background-repeat: no-repeat;
     background-position: center;
     height: 220px;
-    border-radius: 15px;
+    border-radius: 19px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -478,7 +532,7 @@ body .bottom_bar{
     margin-right: auto;
     height: max-content;
     border: 0.5px solid rgb(194, 193, 193);
-    border-radius: 15px;
+    border-radius: 19px;
     display: grid;
     grid-template-columns: 100%;
     grid-auto-flow: row;
@@ -490,7 +544,7 @@ body .bottom_bar{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    border-top: 1px solid rgb(194, 193, 193);
+    border-bottom: 1px solid rgb(194, 193, 193);
 }
 
 .confirm_back{
@@ -515,7 +569,7 @@ body .bottom_bar{
     margin-right: 0;
 }
 
-.box_value, .box_value1{
+.box_value{
     font-size: 17px;
     font-weight: 500;
     margin-top: auto;
@@ -549,4 +603,81 @@ body .bottom_bar{
     bottom: 0;
 }
 
+.custom-card {
+    background: var(--background2);
+    border-radius: 19px;
+    padding: 20px 23px;
+    width: 95%;
+    margin: 10px auto;
+    box-shadow: var(--shadow);
+    box-sizing: border-box;
+    height: auto;
+    overflow: visible;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "Poppins", sans-serif;
+}
+.field {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #323332;
+    color: white
+}
+
+.field:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.field label {
+    font-size: 15px;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 5px;
+    
+}
+
+.field strong {
+    font-size: 20px;
+    display: block;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+
+.value-copy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.value-copy button {
+    color: #4ba4fe;
+    background-color: #0a294c;
+    width: max-content;
+    padding-left: 18px;
+    padding-right: 18px;
+    font-size: 16px;
+    font-weight: 600;
+    height: 32px;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: -3px;
+    border-radius: 20px;
+    border: none;
+}
+
+.value-copy button:hover {
+    background-color: #dbeaf9;
+}
+
+.bottomtesktern{
+    font-size: 9px;
+    font-family: sans-serif;
+    color: #383838;
+    font-weight: 600;
+    text-align: center; 
+}
 

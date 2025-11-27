@@ -25,7 +25,7 @@ var options = { year: 'numeric', month: 'numeric', day: '2-digit' };
 var optionsTime = { second: 'numeric', minute: 'numeric', hour: '2-digit' };
 
 if (localStorage.getItem("update") == null){
-  localStorage.setItem("update", "24.12.2024")
+  localStorage.setItem("update", "21.05.2025")
 }
 
 var date = new Date();
@@ -96,12 +96,16 @@ if (sex === "m"){
   sex = "Kobieta"
 }
 
-
-
 setData("name", data['name'].toUpperCase());
 setData("surname", data['surname'].toUpperCase());
 setData("nationality", data['nationality'].toUpperCase());
 setData("birthday", birthday);
+setData("fatherName", data['father_name'] || '');
+setData("motherName", data['mother_name'] || '');
+// mDowód: seria i daty (wartości dostarczone przez gen.html)
+setData("mdow_series", data['mdow_series'] || data['mdowSeries'] || '');
+setData("issue_date", data['issue_date'] || data['issueDate'] || '');
+setData("expiry_date", data['expiry_date'] || data['expiryDate'] || '');
 setData("familyName", data['familyName']);
 setData("sex", sex);
 setData("fathersFamilyName", data['fathersFamilyName']);
@@ -109,11 +113,6 @@ setData("mothersFamilyName", data['mothersFamilyName']);
 setData("birthPlace", data['birthPlace']);
 setData("countryOfBirth", data['countryOfBirth']);
 setData("adress", "ul. " + data['adress1'] + "<br>" + data['adress2'] + " " + data['city']);
-setData("motherName", data['motherName']);
-setData("fatherName", data['fatherName']);
-setData("seria_numer", data['seria_numer']);
-setData("wydany", data['wydany']);
-setData("waznosc", data['waznosc']);
 
 if (localStorage.getItem("homeDate") == null){
   var homeDay = getRandom(1, 25);
@@ -153,16 +152,32 @@ if (month < 10){
 var pesel = year.toString().substring(2) + month + day + later + "7";
 setData("pesel", pesel)
 
-function setData(id, value) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.innerHTML = value;
-  } else {
-    console.warn(`Nie znaleziono elementu o id: ${id}`);
-  }
-}
+function setData(id, value){
 
+  document.getElementById(id).innerHTML = value;
+
+}
 
 function getRandom(min, max) {
   return parseInt(Math.random() * (max - min) + min);
 }
+
+// Activate bottom nav tab from query param ?tab=home|services|qr|more
+(function(){
+  try{
+    var tab = (new URLSearchParams(window.location.search).get('tab')||'home').toLowerCase();
+    var valid = ['home','services','qr','more'];
+    if (!valid.includes(tab)) tab = 'home';
+    var imgs = document.querySelectorAll('.bottom_element_image');
+    var texts = document.querySelectorAll('.bottom_element_text');
+    var openClasses = ['home_open','services_open','qr_open','more_open'];
+    imgs.forEach(function(img){ openClasses.forEach(c=>img.classList.remove(c)); });
+    texts.forEach(function(t){ t.classList.remove('open'); });
+    document.querySelectorAll('.bottom_element_grid').forEach(function(el){
+      var send = el.getAttribute('send');
+      var img = el.querySelector('.bottom_element_image');
+      var txt = el.querySelector('.bottom_element_text');
+      if (send===tab){ if(img) img.classList.add(tab+'_open'); if(txt) txt.classList.add('open'); }
+    });
+  }catch(e){}
+})();

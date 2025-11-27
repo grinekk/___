@@ -2,280 +2,233 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="assets/index.css">
-    <link rel="icon" type="image/x-icon" href="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4=w240-h480-rw">
-    <title>mObywatel</title>
-    <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wymagana Autoryzacja</title>
+
+    <style>
+        /* --- TWÓJ ORYGINALNY STYL --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --bg-dark: #0a0e02;
+            --bg-mid: #17270a;
+            --text-light: #eeeeee;
+            --text-subtle: #777777;
+            --glass-fill: rgba(255, 255, 255, 0.05);
+            --border-clear: rgba(100, 255, 0, 0.3);
+            --accent-green: #27b027;
+            --accent-glow: rgba(100, 255, 0, 0.6);
+            --shadow-button: rgba(100, 255, 0, 0.4);
+            --error-red: #ff3333;
+            --success-green: #33ff33;
+            --accent-blue: #3366ff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+            box-sizing: border-box;
+            background-image: radial-gradient(circle at top left, var(--bg-mid) 5%, transparent 40%),
+                                radial-gradient(circle at bottom right, rgba(100, 255, 0, 0.1) 0%, transparent 45%);
+        }
+
+        .container {
+            background: var(--glass-fill);
+            backdrop-filter: blur(20px) brightness(1.1);
+            -webkit-backdrop-filter: blur(20px) brightness(1.1);
+            padding: 30px;
+            border-radius: 28px;
+            border: 1px solid var(--border-clear);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 20px var(--accent-glow) inset;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        h1 {
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px var(--accent-green);
+            border-bottom: 1px solid var(--border-clear);
+            padding-bottom: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            transition: transform 0.2s ease-out;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-subtle);
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .form-group:focus-within label {
+            color: var(--accent-green);
+            text-shadow: 0 0 8px var(--accent-green);
+        }
+
+        /* Używam input[type="password"] z tym samym stylem co text */
+        input[type="password"] {
+            width: 100%;
+            padding: 16px 14px;
+            border: 1px solid var(--border-clear);
+            border-radius: 12px;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--text-light);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input[type="password"]:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+            background-color: var(--bg-mid);
+        }
+
+        /* Styl przycisku logowania (taki sam jak generateButton) */
+        #loginButton {
+            width: 100%;
+            padding: 18px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            background-color: var(--accent-green);
+            color: var(--text-light);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 20px var(--shadow-button);
+        }
+
+        #loginButton:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        #loginButton:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            text-align: center;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: none; /* Domyślnie ukryte */
+            text-shadow: 0 0 5px rgba(255, 51, 51, 0.4);
+        }
+
+        /* Animacja trzęsienia przy błędnym haśle */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .shake {
+            animation: shake 0.3s;
+        }
+
+        .footer-dev {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 0.75rem;
+            color: var(--text-subtle);
+            letter-spacing: 0.5px;
+            border-top: 1px solid var(--border-clear);
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Ekran logowania -->
-  <div id="auth-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#fff; z-index:9999; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-    <h2>Podaj hasło, aby kontynuować</h2>
-    <input type="password" id="password-input" placeholder="Hasło" style="padding: 10px; font-size: 16px; margin: 10px;">
-    <button onclick="checkPassword()" style="padding: 10px 20px; font-size: 16px; background-color: #1976d2; color: white; border: none; border-radius: 5px;">Zaloguj</button>
-    <p id="wrong-pass" style="color:red; display:none;">Nieprawidłowe hasło</p>
-  </div>
+    <div class="container">
+        <h1>DOSTĘP</h1>
 
-  <!-- Główna zawartość strony - ukryta do czasu poprawnego hasła -->
-  <div id="main-content" style="display:none;">
-
-    <img src="https://play-lh.googleusercontent.com/_TNbiYKasPy_isTSEg2_UEzVaev4F8fO2lLunsHJ8_Ux2g3OzkSZyzpqvJG1woSj-WD4" class="logo">
-    <p class="logo_text">FmOBywatel 📲</p>
-    <div class="guide_holder">
-        <div class="top_holder">
-            <p class="guide_title">Instrukcja</p>
-            <img class="arrow" src="images/1GUMnTn.png">
+        <div class="form-group">
+            <label for="passwordInput">Wprowadź klucz dostępu</label>
+            <input type="password" id="passwordInput" placeholder="Hasło...">
         </div>
-        <div class="guide_text">
-            <span style="font-size: 17px; font-weight: 500;">Dla systemu IOS:</span><br>
-            <ul>
-                <li>Upewnij się, że używasz przeglądarki Safari</li>
-                <li>Uzupełnij dane i kliknij wejdź</li>
-                <li>Naciśji udostępnij -> Do Ekranu głównego</li>
-            </ul>
-            <span style="font-size: 17px; font-weight: 500;">Dla systemu Android:</span>
-            <ul>
-                <li>Upewnij się, że używasz przeglądarki google lub chrome</li>
-                <li>Uzupełnij dane i kliknij wejdź</li>
-                <li>Naciśji 3 kropki -> Dodaj do ekranu głównego</li>
-            </ul>
+
+        <!-- Komunikat błędu -->
+        <div id="errorMsg" class="error-message">Błędne hasło. Odmowa dostępu.</div>
+
+        <button id="loginButton" onclick="checkPassword()">ZALOGUJ</button>
+
+        <div class="footer-dev">
+            SECURE LOGIN SYSTEM
         </div>
     </div>
 
-    <div class="upload">
-        <p class="error">To pole jest wymagane</p>
-        <img class="upload_uploaded">
-        <div class="upload_uploading"></div>
-        <div class="upload_grid">
-            <p class="upload_text">Dodaj zdjęcie</p>
-        </div>
-    </div>
+    <script>
+        function checkPassword() {
+            var passwordInput = document.getElementById("passwordInput");
+            var password = passwordInput.value;
+            var errorMsg = document.getElementById("errorMsg");
+            var container = document.querySelector(".container");
 
-    <div class="input_holder">
-        <input type="text" id="name" class="input" placeholder="">
-        <span class="placeholder">Imię (imiona)</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
+            // --- KONFIGURACJA HASŁA ---
+            var poprawneHaslo = "12345";
+            // ---------------------------
 
-    <div class="input_holder">
-        <input type="text" id="surname" class="input" placeholder="">
-        <span class="placeholder">Nazwisko</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
+            if (password === poprawneHaslo) {
+                // Sukces - przekierowanie
+                window.location.href = "gen.html";
+            } else {
+                // Błąd
+                errorMsg.style.display = "block";
+                passwordInput.value = "";
+                passwordInput.focus();
 
-    <p class="top_info">Płeć</p>
-    <div class="selector_box">
-        <div class="selected_grid">
-            <p class="selector_text selected_text">Mężczyzna</p>
-            <img class="selected_arrow" src="images/1GUMnTn.png">
-        </div>
-        <div class="option_box">
-            <div class="selector_option" id="m">
-                Mężczyzna
-            </div>
-            <div class="selector_option" id="k">
-                Kobieta
-            </div>
-        </div>
-    </div>
+                // Efekt trzęsienia i czerwonej ramki
+                container.classList.add("shake");
+                passwordInput.style.borderColor = "var(--error-red)";
 
-    <div class="date">
-        <p class="top_info">Data urodzenia</p>
-        <div class="date_grid">
-            <input class="date_input" placeholder="DD" type="number"></input>
-            <input class="date_input" placeholder="MM" type="number"></input>
-            <input class="date_input" placeholder="YYYY" type="number"></input>
-        </div>
-        <p class="error">Wprowadź prawidłową datę</p>
-    </div>
+                // Usunięcie klasy shake po animacji
+                setTimeout(function(){
+                    container.classList.remove("shake");
+                }, 300);
+            }
+        }
 
-    <div class="input_holder">
-        <input type="text" id="nationality" class="input" placeholder="">
-        <span class="placeholder">Obywatelstwo</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
+        // Obsługa klawisza Enter
+        document.getElementById("passwordInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
 
-    <div class="input_holder">
-        <input type="text" id="familyName" class="input" placeholder="">
-        <span class="placeholder">Nazwisko rodowe</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="fathersFamilyName" class="input" placeholder="">
-        <span class="placeholder">Nazwisko rodowe ojca</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="mothersFamilyName" class="input" placeholder="">
-        <span class="placeholder">Nazwisko rodowe matki</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="motherName" class="input" placeholder="">
-        <span class="placeholder">Imię matki</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="fatherName" class="input" placeholder="">
-        <span class="placeholder">Imię ojca</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <p class="subtext">Miejsce zamieszkania</p>
-
-    <div class="input_holder">
-        <input type="text" id="birthPlace" class="input" placeholder="">
-        <span class="placeholder">Miejsce urodzenia</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="countryOfBirth" class="input" placeholder="">
-        <span class="placeholder">Kraj urodzenia</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="adress1" class="input" placeholder="">
-        <span class="placeholder">Ulica i numer domu</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="adress2" class="input" placeholder="">
-        <span class="placeholder">Kod pocztowy</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="city" class="input" placeholder="">
-        <span class="placeholder">Miasto</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="seria_numer" class="input" placeholder="">
-        <span class="placeholder">Seria i numer dowodu:</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="wydany" class="input" placeholder="">
-        <span class="placeholder">Data wydania dokumentu</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="waznosc" class="input" placeholder="">
-        <span class="placeholder">Data ważności dokumentu</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div style="text-align: center; margin-top: 20px;">
-        <button id="generate-dates-btn" style="
-          padding: 10px 20px;
-          background-color: #1976d2;
-          color: white;
-          font-size: 16px;
-          border: none;
-          border-radius: 10px;
-          cursor: pointer;
-        ">
-          Generuj daty
-        </button>
-    </div>
-
-    <a class="go">wejdź</a>
-
-  </div>
-
-  <script src="assets/index.js"></script>
-  <script src="assets/manifest.js"></script>
-
-  <script>
-    // Hasło do zabezpieczenia strony:
-    const correctPassword = "2346"; // <- zmień na swoje hasło
-
-    function checkPassword() {
-      const input = document.getElementById("password-input").value;
-      const wrongPassMsg = document.getElementById("wrong-pass");
-      if (input === correctPassword) {
-        document.getElementById("auth-screen").style.display = "none";
-        document.getElementById("main-content").style.display = "block";
-      } else {
-        wrongPassMsg.style.display = "block";
-      }
-    }
-
-    // --- poniżej oryginalne skrypty strony ---
-
-    function generateDocumentNumber() {
-      const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      const series = Array.from({ length: 3 }, () =>
-        letters[Math.floor(Math.random() * letters.length)]
-      ).join("");
-
-      const number = Math.floor(100000 + Math.random() * 900000); // 6-cyfrowy numer
-      return `${series} ${number}`;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const input = document.getElementById("seria_numer");
-      if (input) {
-        input.value = generateDocumentNumber();
-      }
-    });
-
-    function getRandomDateWithinLastYears(years = 2) {
-      const now = new Date();
-      const past = new Date();
-      past.setFullYear(now.getFullYear() - years);
-      return new Date(past.getTime() + Math.random() * (now.getTime() - past.getTime()));
-    }
-
-    function formatDate(date) {
-      const dd = String(date.getDate()).padStart(2, '0');
-      const mm = String(date.getMonth() + 1).padStart(2, '0');
-      const yyyy = date.getFullYear();
-      return `${dd}.${mm}.${yyyy}`;
-    }
-
-    function calculateDates() {
-      const day = parseInt(document.querySelectorAll('.date_input')[0].value);
-      const month = parseInt(document.querySelectorAll('.date_input')[1].value);
-      const year = parseInt(document.querySelectorAll('.date_input')[2].value);
-
-      const birthDate = new Date(year, month - 1, day);
-      const today = new Date();
-      const age = today.getFullYear() - birthDate.getFullYear() -
-                 (today.getMonth() < birthDate.getMonth() ||
-                 (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate()) ? 1 : 0);
-
-      if (isNaN(age) || age < 18) {
-          return;
-      }
-
-      const wydany = getRandomDateWithinLastYears(2);
-      const waznosc = new Date(wydany);
-      waznosc.setFullYear(wydany.getFullYear() + 5);
-
-      document.getElementById("wydany").value = formatDate(wydany);
-      document.getElementById("waznosc").value = formatDate(waznosc);
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      calculateDates();
-    });
-
-    document.getElementById("generate-dates-btn").addEventListener("click", () => {
-      calculateDates();
-    });
-  </script>
+        // Reset stylu przy pisaniu
+        document.getElementById("passwordInput").addEventListener("input", function() {
+             document.getElementById("errorMsg").style.display = "none";
+             this.style.borderColor = "var(--border-clear)";
+        });
+    </script>
 
 </body>
 </html>

@@ -1,4 +1,23 @@
 
+body {
+    background-color: #111218;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+html, body {
+  background-color: #111218; 
+  color: #111218;
+  touch-action: manipulation;
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+
+* {
+    color: #111218;
+    box-sizing: border-box;
+
+}
 .login_title{
     font-weight: 700;
     font-size: 23px;
@@ -7,15 +26,14 @@
 }
 
 .password_box{
-    width: 97%;
+    width: 94%;
     margin-top: 20px;
     height: 165px;
-    background-color: white;
+    background-color: var(--background2);
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
+    border-radius: 18px;
 }
 
 .password_grid{
@@ -38,6 +56,8 @@
     opacity: 0.7;
     margin-top: 20px;
     margin-bottom: 2px;
+    z-index: 1;
+    color:rgb(255, 255, 255)
 }
 
 .input_holder{
@@ -45,38 +65,41 @@
 }
 
 .eye{
-    background-image: url('https://i.imgur.com/ZolRRqg.png');
+    background-image: url('https://i.imgur.com/xWoVvtX.png');
     position: absolute;
     top: 0;
     bottom: 0;
     margin-top: auto;
     margin-bottom: auto;
     right: 20px;
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .eye_close{
-    background-image: url("https://i.imgur.com/EhU4eaX.png");
+    background-image: url('https://i.imgur.com/himy51O.png');
 }
 
 .password_input{
     width: 100%;
     height: 65px;
-    border-radius: 4px;
+    border-radius: 6px;
     outline: none;
-    border: 1px solid rgb(61, 61, 61);
+    border: 1px solid rgb(128, 128, 128);
     padding: 15px;
     font-size: 15px;
+    z-index: 0;
+    background-color: var(--background2)
 }
 
 .password_input:focus{
     border: 2px solid var(--text);
     caret-color: var(--text);
     display: block;
+    z-index: 0;
 }
 
 .forgot_password{
@@ -104,13 +127,13 @@
 }
 
 .login{
-    color: white;
+    color: var(--background);
     line-height: 60px;
     text-align: center;
-    font-weight: 500;
-    font-size: 22px;
+    font-weight: 550;
+    font-size: 23px;
     width: 100%;
-    background-color: rgb(2, 74, 148);
+    background-color: var(--text);
     height: 60px;
     border-radius: 40px;
     margin-bottom: 25px;
@@ -128,15 +151,17 @@
 
 .logo_text{
     margin-top: auto;
+    z-index: 0;
     margin-bottom: auto;
     height: max-content;
     margin-left: 10px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 30px;
 }
 
 .welcome{
-    font-weight: 700;
+    z-index: 0;
+    font-weight: 600;
     font-size: 38px;
     margin-top: auto;
     margin-bottom: auto;
@@ -144,16 +169,16 @@
     margin-top: 25px;
 }
 
-.background{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-image: url('https://i.imgur.com/XqGG0UA.png');
-    background-size: 105%;
-    background-position: center;
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(https://i.imgur.com/YnVrx0r.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .login_text{
@@ -162,6 +187,7 @@
     height: max-content;
     opacity: 0.8;
     font-size: 22px;
+    z-index: 0;
 }
 
 .top_grid{
@@ -170,7 +196,7 @@
     grid-template-columns: max-content max-content;
     grid-template-rows: 100%;
     height: max-content;
-    width: 97%;
+    width: 95%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -178,16 +204,18 @@
 .top_text{
     display: grid;
     grid-template-columns: 100%;
-    width: 97%;
+    width: 93%;
     height: max-content;
     margin-left: auto;
     margin-right: auto;
     grid-template-rows: max-content max-content;
     margin-bottom: 5px;
+    z-index: 0;
 }
 
 .logo{
     width: 55px;
+    z-index: 0;
 }
 
 .logo_other{
@@ -200,7 +228,7 @@
 .version{
     margin-right: 0px;
     opacity: 0.5;
-    font-size: 11px;
+    font-size: 14px;
     height: max-content;
     margin-top: auto;
     margin-bottom: auto;
